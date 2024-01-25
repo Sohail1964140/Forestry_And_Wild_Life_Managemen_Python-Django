@@ -1,0 +1,95 @@
+{% load crispy_forms_tags %}
+{% load static %}
+{% include "utils/messages.html" %}
+
+  <div class="content container-fluid">
+    <div class="page-header">
+      <div class="row">
+        <div class="col-sm-12">
+          <div class="page-sub-header">
+            <h3 class="page-title">{{heading}}</h3>
+            <ul class="breadcrumb">
+              <li class="breadcrumb-item">
+                <a href="../index.html">Home</a>
+                
+              </li>
+              <li class="breadcrumb-item"><a href="#" hx-target="#MDI" hx-push-url="{% url 'core:customerList' %}" hx-get="{% url 'core:customerList' %}">Customers</a></li>
+              <li class="breadcrumb-item active">{% if isUpdate %} Customer Update {% else %} Customer Add {% endif %}</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-md-12">
+        <div class="card">
+          <div class="card-header mb-3">
+            <h5 class="card-title">Enter Customer Information</h5>
+          </div>
+          <div class="card-body">
+            <form action="." enctype="multipart/form-data" hx-target="#MDI" {% if isUpdate %} hx-post="{% url 'core:customerUpdate' object.pk %}" {% else %} hx-post="{% url 'core:customerAdd' %}" {% endif %} >
+              {% csrf_token %}
+              <div class="row">
+                <div class="col-xl-12">
+                  <div class="form-group row">
+                    <label class="col-lg-2 col-form-label">{{form.name.label}}</label>
+                    <div class="col-lg-10">
+                      {{form.name|as_crispy_field}}
+                    </div>
+                  </div>
+                </div>
+                
+
+                <div class="col-xl-12">
+                  <div class="form-group row">
+                    <label class="col-lg-2 col-form-label">{{form.contact.label}}</label>
+                    <div class="col-lg-3">
+                      {{form.contact|as_crispy_field}}
+                    </div>
+                  </div>
+                </div>
+
+                <div class="col-xl-12">
+                  <div class="form-group row">
+                    <label class="col-lg-2">{{form.image.label}}</label>
+                    <div class="col-lg-6">
+                      {{form.image|as_crispy_field}}
+                    </div>
+                  </div>
+                </div>
+
+
+                <div class="col-xl-12">
+                  <div class="form-group row">
+                    <label class="col-lg-2 col-form-label">{{form.address.label}}</label>
+                    <div class="col-lg-10">
+                      {{form.address|as_crispy_field}}
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="text-end">
+                <button type="submit"  class="btn btn-primary">Submit</button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  {% include 'utils/acceptOnlyChars.html' %}
+ 
+<script>
+  {% if isUpdate %}
+  let a = document.querySelector(".text-break a");
+  a.setAttribute("target","_blank");
+{% endif %}
+
+ acceptOnlyChars(['id_name']);
+ acceptOnlyNumbers(['id_contact'])
+
+
+
+</script>

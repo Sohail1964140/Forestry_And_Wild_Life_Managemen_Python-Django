@@ -1,0 +1,464 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <!-- META TAGS -->
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <!-- BOOTSTRAP -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.2.3/css/bootstrap.min.css"
+      integrity="sha512-SbiR/eusphKoMVVXysTKG/7VseWii+Y3FdHrt0EpKgpToZeemhqHeZeLWLhJutz/2ut2Vw1uQEj2MbRF+TVBUA=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+
+    <!-- FONT AWESOME -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+      integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+
+    <!-- CUSTOM CSS -->
+    <link rel="stylesheet" href="{% static 'assets/css/style2.css' %}" />
+    <link rel="stylesheet" href="{% static 'assets/css/resposive.css' %}" />
+
+    <title>Forestry</title>
+  </head>
+
+  <body data-bs-spy="scroll" data-bs-target=".navbar">
+    <!-- 
+    === HEADER SECTION ===
+    -->
+    <header class="headerSection">
+      <!-- navbar -->
+      <nav class="navbar navbar-expand-lg fixed-top">
+        <div class="container">
+          <a class="navbar-brand" href="#"
+            ><img src="{% static 'assets/img/img/logo.png' %}" alt="logo" class="img-fluid"
+          /></a>
+          <button
+            class="navbar-toggler"
+            type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#navbarNav"
+            aria-controls="navbarNav"
+            aria-expanded="false"
+            aria-label="Toggle navigation"
+          >
+            <span><i class="fa fa-stream"></i></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav m-auto">
+              <li class="nav-item">
+                <a class="nav-link active" aria-current="page" href="#home"
+                  >Home</a
+                >
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#about">About</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#project">Gallery</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#services">Services</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#contact">Contact</a>
+              </li>
+            </ul>
+            <div class="navContact">
+              <a href="tel:091- 9210333" class="navIcon"
+                ><i class="fa fa-phone-volume"></i>091-9210333</a
+              >
+              <a href="{% url 'account:login' %}" class="mainBtn">Login</a>
+            </div>
+          </div>
+        </div>
+      </nav>
+    </header>
+
+    <!-- 
+    === HERO SECTION ===
+    -->
+  
+  <section class="heroSection" id="home" style='background-image: linear-gradient(to right, rgb(1, 37, 34), transparent),url({% static 'assets/img/img/heroImage.jpg' %});'>
+      <div class="container">
+        <div class="row heroRow">
+          <div class="col-12 col-lg-6">
+            <div class="heroContent">
+              <h1 class="title">
+                Welcome to the <span>Forestry Department</span> of Matta Swat
+              </h1>
+              <p class="text">
+                Climate Change Forestry, Environment & Wildlife Department is striving to improve the Forest, Environment and Wildlife  through development & application of innovative technologies in Forest, Environment and Wildlife  and efficient management of natural resources through institutional arrangements in the province.
+              </p>
+              <div class="actionBtn">
+                <a href="#" class="mainBtn">Contact Us</a>
+              </div>
+            </div>
+            
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 
+    === ABOUT SECTION ===
+    -->
+
+    <section class="aboutSection" id="about">
+      <div class="container">
+        <div class="row aboutRow">
+          <div class="col-12">
+            <div class="sectionHeading">
+              <h1 class="sectionTitle">About Us</h1>
+              <p class="text">
+                Forestry, Environment & Wildlife Department is headed by a  Secretary who is assisted by a Special Secretary, Two Additional Secretaries, Three Deputy Secretaries and Six Section Officers besides Director(B&A) and Deputy Director Planning. It is the Administrative Department of (05) attached formation. 
+            </div>
+          </div>
+          <div class="col-12 col-lg-6">
+            <div class="aboutImage">
+              <img src="{% static 'assets/img/img/about1.png' %}" alt="aboutImage" class="img-fluid" />
+            </div>
+          </div>
+
+          <div class="col-12 col-lg-6">
+            <div class="aboutContent">
+              <h5 class="subTitle">Message from Minister</h5>
+              <h1 class="sectionTitle">Mr.Muhammad Ishtiaq Umar</h1>
+              <p class="text">
+                It is gratifying to note that Khyber Pakhtunkhwa province of
+                Pakistan is the paradise of forests and trees. In comparison
+                with less than 5% of the national average 17% area of the
+                province is decorated with rich and dense forests expending
+                along the major portion of Hazara and Malakand divisions. These
+                forests contribute a lot to provincial income, public jobs and
+                economic uplift of the country. Keeping in view these advantages
+                of the forests it becomes imperative to preserve our forest
+                resources by a careful utilization and vigilant protection of
+                forest lands. Regulated harvesting of forest and proper
+                conservation practices can ensure the safety of forests and the
+                maintenance of necessary ecological balance
+              </p>
+             
+            </div>
+          </div>
+        </div>
+        <div class="row aboutRow flex-row-reverse">
+          <div class="col-12 col-lg-6">
+            <div class="aboutImage">
+              <img src="{% static 'assets/img/img/about2.png' %}" alt="aboutImage" class="img-fluid" />
+            </div>
+          </div>
+
+          <div class="col-12 col-lg-6">
+            <div class="aboutContent">
+              <h5 class="subTitle">Message from Secretary Home</h5>
+              <h1 class="sectionTitle">Mr. Muhammad Abid Majeed</h1>
+              <p class="text">
+                fter assuming the duties as Secretary Forestry, Environment &
+                Wildlife Department Govt of Khyber Pakhtunkhwa my aim is to
+                build a Sustainable Forest, Climate-resilient, Neat & Clean
+                Environment friendly province, and initiate activities to
+                Protect the Wildlife of the province. Forest Cover of the
+                province significantly enhanced through Billion Tree
+                Afforestation Project which contributed equally to the
+                protection, preservation and promotion of Wildlife.. For
+                Sustainable Green Growth we will take political commitment at
+                the highest levels, make smart policies, ensure effective law
+                enforcement and introduce innovative partnerships etc. I have
+                committed myself to reduce deforestation, sustain healthy
+                forests, adoption of all mitigation measures to control
+                environmental pollutions.
+              </p>
+            
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 
+    === GALLERY SECTION ===
+    -->
+
+    <section class="gallerySection" id="project">
+      <div class="container">
+        <div class="row">
+          <div class="col-12">
+            <div class="sectionHeading">
+              <h5 class="subTitle">Our Projects</h5>
+              <h1 class="sectionTitle">Gallery</h1>
+             
+            </div>
+          </div>
+        </div>
+
+        <!-- gallery Row -->
+        <div class="row galleryRow">
+          <div class="col-12 col-lg-3">
+            <div class="galleryImage">
+              <img src="{% static 'assets/img/img/img1.jpg' %}" class="img-fluid" />
+            </div>
+          </div>
+          <div class="col-12 col-lg-3">
+            <div class="galleryImage">
+              <img src="{% static 'assets/img/img/img2.jpg' %}" class="img-fluid" />
+            </div>
+          </div>
+          <div class="col-12 col-lg-3">
+            <div class="galleryImage">
+              <img src="{% static 'assets/img/img/img3.jpg' %}" class="img-fluid" />
+            </div>
+          </div>
+          <div class="col-12 col-lg-3">
+            <div class="galleryImage">
+              <img src="{% static 'assets/img/img/img4.jpeg' %}" class="img-fluid" />
+            </div>
+          </div>
+        </div>
+        <div class="row galleryRow">
+          <div class="col-12 col-lg-3">
+            <div class="galleryImage">
+              <img src="{% static 'assets/img/img/img5.jpeg' %}" class="img-fluid" />
+            </div>
+          </div>
+          <div class="col-12 col-lg-3">
+            <div class="galleryImage">
+              <img src="{% static 'assets/img/img/img6.jpg' %}" class="img-fluid" />
+            </div>
+          </div>
+          <div class="col-12 col-lg-3">
+            <div class="galleryImage">
+              <img src="{% static 'assets/img/img/img7.jpg' %}" class="img-fluid" />
+            </div>
+          </div>
+          <div class="col-12 col-lg-3">
+            <div class="galleryImage">
+              <img src="{% static 'assets/img/img/img8.jpg' %}" class="img-fluid" />
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 
+    === GALLERY SECTION ===
+    -->
+
+    <section class="serviceSection" id="services">
+      <div class="container">
+        <div class="row">
+          <div class="col-12">
+            <div class="sectionHeading">
+              <h5 class="subTitle">Our Services</h5>
+              <h1 class="sectionTitle">Services</h1>
+              
+            </div>
+          </div>
+          <div class="col-12 col-lg-4">
+            <div class="card">
+              <div class="card-body">
+                <div class="cardIcon">
+                  <span><i class="fa fa-gears"></i></span>
+                </div>
+                <div class="cardContent">
+                  <h5 class="cardTitle">Online Services</h5>
+                  <p class="text">
+                    Discover our range of online services designed for your convenience. From expert assistance to 24/7 accessibility, we're here to make your life easier. Explore our offerings below and get started today.
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-12 col-lg-4">
+            <div class="card">
+              <div class="card-body">
+                <div class="cardIcon">
+                  <span><i class="fa fa-home"></i></span>
+                </div>
+                <div class="cardContent">
+                  <h5 class="cardTitle">offline Services</h5>
+                  <p class="text">
+                    Experience our in-person solutions tailored to your needs. Our dedicated team is here to provide expert assistance. Explore our offerings and let us help you achieve your goals.
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-12 col-lg-4">
+            <div class="card">
+              <div class="card-body">
+                <div class="cardIcon">
+                  <span><i class="fa fa-users"></i></span>
+                </div>
+                <div class="cardContent">
+                  <h5 class="cardTitle">Department wise Services</h5>
+                  <p class="text">
+                    DEPARTMENT WISE SERVICES, PROCEDURES, AND DELIVERY TIME OF SERVICE PROVISION
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 
+    === CONTACT SECTION ===
+    -->
+
+    <section class="contactSection" id="contact">
+      <div class="container">
+        <div class="row contactRow">
+          <div class="col-12 col-lg-6">
+            <div class="contactContent">
+              <h2 class="contactTitle">Contact Us</h2>
+              <p class="text">
+                Address: Khyber Road,  Near Pearl Continental (PC) Hotel
+<br>
+                E-mail Address:  secretary.fewdkp@gmail.com
+                
+            
+              </p>
+
+              <div class="contactIcon">
+                <a target="_blank" href="https://web.facebook.com/FEWDKPGovt?_rdc=1&_rdr"><i class="fa-brands fa-facebook-f"></i></a>
+                <a href="mailto:secretary.fewdkp@gmail.com"><i class="fa fa-envelope"></i></a>
+               
+              </div>
+            </div>
+          </div>
+
+          <div class="col-12 col-lg-6">
+            <div class="contactForm">
+              <form class="input-group">
+                <input
+                  type="text"
+                  class="form-control"
+                  placeholder="Enter name"
+                  required
+                />
+                <input
+                  type="email"
+                  class="form-control"
+                  placeholder="Enter email"
+                  required
+                />
+                <textarea
+                  name="message"
+                  cols="30"
+                  rows="6"
+                  class="form-control"
+                  placeholder="Message"
+                ></textarea>
+                <div class="submitBtn">
+                  <button class="mainBtn" type="submit">Submit</button>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 
+    === FOOTER SECTION ===
+    -->
+
+    <footer class="footerSection" id="footer">
+      <div class="container">
+        <div class="row">
+          <div class="col-12 col-lg-4">
+            <div class="footerHeading">
+              <img
+                src="{% static 'assets/img/img/logo.png' %}"
+                alt="footerLogo"
+                class="img-fluid footerLogo"
+              />
+              <p class="text">
+                Climate Change Forestry, Environment & Wildlife Department is striving to improve the Forest, Environment and Wildlife  through development & application of innovative technologies in Forest - See more at: https://few.kp.gov.pk/#sthash.y1k8DPTT.dpuf
+              </p>
+            </div>
+          </div>
+          <div class="col-6 col-lg-2">
+            <div class="footerLink">
+              <ul class="footerList">
+                <span class="listTitle">About Us</span>
+                <li class="nav-item"><a href="#" class="nav-link">Home</a></li>
+                <li class="nav-item"><a href="#" class="nav-link">About</a></li>
+                <li class="nav-item">
+                  <a href="#" class="nav-link">Gallery</a>
+                </li>
+                <li class="nav-item">
+                  <a href="#" class="nav-link">Contact</a>
+                </li>
+              </ul>
+            </div>
+          </div>
+          <div class="col-6 col-lg-2">
+            <div class="footerLink">
+              <ul class="footerList">
+                <span class="listTitle">Services</span>
+                <li class="nav-item">
+                  <a href="#" class="nav-link">Complaint</a>
+                </li>
+                <li class="nav-item">
+                  <a href="#" class="nav-link">Employees</a>
+                </li>
+                <li class="nav-item">
+                  <a href="#" class="nav-link">Contact</a>
+                </li>
+                <li class="nav-item">
+                  <a href="#" class="nav-link">Offender List</a>
+                </li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="col-12 col-lg-3">
+            <span class="listTitle">Connects</span>
+            <div class="socialMedia">
+              <a href="#" class="mediaIcon"
+                ><i class="fa-brands fa-facebook-f"></i
+              ></a>
+              <a href="#" class="mediaIcon"
+                ><i class="fa-envelope"></i
+              ></a>
+            
+            </div>
+          </div>
+
+          <div class="col-12">
+            <div class="copyright">
+              <hr />
+              <p class="copy">&#169; Azmat Software House 2023</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </footer>
+
+    <!-- === SCRIPT FILES === -->
+
+    <!-- BOOTSTRAP -->
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.2.3/js/bootstrap.bundle.min.js"
+      integrity="sha512-i9cEfJwUwViEPFKdC1enz4ZRGBj8YQo6QByFTF92YXHi7waCqyexvRD75S5NVTsSiTv7rKWqG9Y5eFxmRsOn0A=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    ></script>
+
+    <!-- CUSTOM SCRIPT -->
+    <script src="./js/main.js"></script>
+  </body>
+</html>

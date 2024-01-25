@@ -1,0 +1,43 @@
+{% load static %}
+{% include "utils/messages.html" %}
+<div class="content container-fluid">
+
+    <div class="page-header">
+    <div class="row">
+    <div class="col">
+    <h3 class="page-title">Delete Confirmation</h3>
+    <ul class="breadcrumb">
+    <li class="breadcrumb-item"><a href="#">Home</a></li>
+    <li class="breadcrumb-item"><a href="#" hx-target="#MDI" hx-push-url="{% url 'wood:alatmentList' %}" hx-get="{% url 'wood:alatmentList' %}">Tree Alatments</a></li>
+    <li class="breadcrumb-item active">Auction Delete</li>
+    </ul>
+    </div>
+    </div>
+    </div>
+    
+    <div class="row" style="height:80vh; position: relative;">
+    <div class="col-sm-12" style="position: absolute; top:30%; left:50%; transform:translate(-50%,-50%)">
+        <p class="card-description text-center">
+            {{msg|safe}}
+        </p>
+
+    
+    {% if not  isDeleted %}
+        <div class="d-flex justify-content-center align-items-center">
+            <form action=""   hx-target="#MDI" method="post">
+                {% csrf_token %}
+                <button type="submit" class="btn btn-outline-danger" hx-target="#MDI" hx-push-url="{% url 'wood:alatmentDelete' object.pk %}" hx-post="{% url 'wood:alatmentDelete' object.pk %}"  >Confirm Delete</button>
+            </form>
+            <button class="btn btn-outline-success" hx-target="#MDI" hx-push-url="{% url 'wood:alatmentList' %}" hx-get="{% url 'wood:alatmentList' %}">Go Back</button>
+        </div>
+        {% else %}
+        <div class="d-flex justify-content-center align-items-center">
+        <button class="btn btn-outline-success" hx-target="#MDI" hx-push-url="{% url 'wood:alatmentList' %}" hx-get="{% url 'wood:alatmentList' %}">Go Back</button>
+        </div>
+        {% endif %}
+        
+   
+    </div>
+    </div>
+    </div>
+ 

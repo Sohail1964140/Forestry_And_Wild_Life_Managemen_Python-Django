@@ -1,0 +1,75 @@
+{% load crispy_forms_tags %}
+{% load static %}
+
+
+<form action="" method="post" hx-post="{% url 'videoAddForm' %}" hx-target="this" hx-swap="outerHTML" enctype="multipart/form-data">
+  {% if not isList %}
+  {% csrf_token %}
+    <div class="form-group row">
+      <label class="col-lg-3 col-form-label">{{videoForm.video.label}}</label>
+      <div class="col-lg-7">
+        {{videoForm.video|as_crispy_field}}
+      </div>
+      <div class="col-lg-2">
+        <button type="submit" href="#"   class="btn  btn-sm btn-success"><i class="fas fa-save"></i></button>
+        <a href="#"  hx-get="{% url 'partialDelete' %}"   class="btn  btn-sm btn-danger ms-1"><i class="fas fa-trash"></i></a>
+      </div>
+    </div>
+    {% else %}
+    <div class="form-group row">
+      <label class="col-lg-3 col-form-label">Video</label>
+      <div class="col-lg-7">
+        {{video}}
+      </div>
+      <div class="col-lg-2">
+        <a href="#"  hx-get="{% url 'videoDelete' video.pk %}"   class="btn  btn-sm btn-danger ms-1"><i class="fas fa-trash"></i></a>
+      </div>
+    </div>
+    {% endif %}
+  </form>
+  
+
+
+
+
+{% comment %} <tr>
+    <td>
+      <label class="col-lg-3 col-form-label"></label>
+    </td>
+    <td>
+      <div class="col-lg-8">
+        <a href="#">khan of bandai</a>
+      </div>
+    </td>
+    <td>
+      <div class="actionbtns d-flex g-1 col-lg-1 text-end pe-3">
+        <a href="add-subject.html" class="btn  btn-sm btn-danger ms-1"><i class="fas fa-trash"></i></a>
+      </div>
+    </td>
+  </tr> {% endcomment %}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+{% comment %} <form action="" method="post">
+    {% csrf_token %}
+    <label class="col-lg-3 col-form-label">{{videoForm.video.label}}</label>
+    <div class="col-lg-8">
+    {{videoForm.video|as_crispy_field}}
+    </div>
+    <div class="actionbtns col-lg-1">
+        <button type="submit">Upload</button>
+    </div>
+</form> {% endcomment %}

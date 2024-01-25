@@ -1,0 +1,59 @@
+{% load crispy_forms_tags %}
+{% load static %}
+{% include "utils/messages.html" %}
+
+  <div class="content container-fluid">
+    <div class="page-header">
+      <div class="row">
+        <div class="col-sm-12">
+          <div class="page-sub-header">
+            <h3 class="page-title">{{heading}}</h3>
+            <ul class="breadcrumb">
+              <li class="breadcrumb-item">
+                <a href="../index.html">Home</a>
+                
+              </li>
+              <li class="breadcrumb-item"><a href="#" hx-target="#MDI" hx-push-url="{% url 'incomeExpense:expenseSourceList' %}" hx-get="{% url 'incomeExpense:expenseSourceList' %}">Expense Source</a></li>
+              <li class="breadcrumb-item active">{% if isUpdate %} Expense Source Update {% else %}  Expense Source Add {% endif %}</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-md-12">
+        <div class="card">
+          <div class="card-header mb-3">
+            <h5 class="card-title">Enter Expense Source Information</h5>
+          </div>
+          <div class="card-body">
+            <form action="." hx-target="#MDI" {% if isUpdate %} hx-post="{% url 'incomeExpense:expenseSourceUpdate' object.slug %}" {% else %} hx-post="{% url 'incomeExpense:expenseSourceAdd' %}" {% endif %} >
+              {% csrf_token %}
+              <div class="row">
+                <div class="col-xl-12">
+                  <div class="form-group row">
+                    <label class="col-lg-3 col-form-label">{{form.name.label}}</label>
+                    <div class="col-lg-9">
+                      {{form.name|as_crispy_field}}
+                    </div>
+                  </div>
+                
+                </div>
+              </div>
+
+              <div class="text-end">
+                <button type="submit"  class="btn btn-primary">Submit</button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  {% include 'utils/acceptOnlyChars.html' %}
+  <script>
+    acceptOnlyChars(['id_name']);
+  </script>

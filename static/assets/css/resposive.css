@@ -1,0 +1,92 @@
+/* 
+=== LAPTOP SCREENS
+ */
+
+@media only screen and (max-width: 1200px) {
+}
+
+/* 
+=== LARGE TABLAT SCREENS
+ */
+
+@media (max-width: 992px) {
+  .headerSection .navbar {
+    text-align: center;
+  }
+
+  .headerSection .navbar .nav-link {
+    margin-left: 0;
+    margin-bottom: 1rem;
+  }
+
+  .headerSection .navbar .navIcon {
+    margin-bottom: 1rem;
+  }
+
+  .headerSection .navbar .navContact {
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  .headerSection .navbar .navContact .mainBtn {
+    margin-bottom: 1rem;
+    width: 100%;
+  }
+
+  /* HERO SECTION */
+  .heroSection .socialIcon {
+    justify-content: center;
+    align-items: center;
+  }
+
+  /* ABOUT SECTION */
+  .aboutSection .aboutContent {
+    margin-top: 1.5rem;
+  }
+
+  /* GALLERY SECTION */
+  .gallerySection .galleryRow .col-12 {
+    padding-left: 0;
+    padding: 0.5rem 1rem;
+  }
+
+  /* CONTACT SECTION */
+  .contactSection .contactForm {
+    margin-top: 2rem;
+  }
+
+  .contactSection .contactContent {
+    text-align: center;
+  }
+
+  .contactSection .contactContent .contactIcon {
+    justify-content: center;
+  }
+
+  .contactSection .contactForm .submitBtn .mainBtn {
+    width: 100%;
+  }
+
+  /* login screen */
+  .LoginScreen .mainContainer {
+    flex-direction: column;
+  }
+  .LoginScreen .mainContainer .logImage,
+  .LoginScreen .mainContainer .logForm {
+    width: 100%;
+  }
+}
+
+/* 
+=== TABLAT SCREENS
+ */
+
+@media (max-width: 768px) {
+}
+
+/* 
+=== MOBILE SCREENS
+ */
+
+@media (max-width: 576px) {
+}

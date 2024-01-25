@@ -1,0 +1,118 @@
+{% load crispy_forms_tags %} {% load static %} {% include "utils/messages.html"%}
+
+
+
+<div class="content container-fluid">
+  <div class="page-header">
+    <div class="row">
+      <div class="col-sm-12">
+        <div class="page-sub-header">
+          <h3 class="page-title">{{heading}}</h3>
+          <ul class="breadcrumb">
+            <li class="breadcrumb-item">
+              <a href="{% url 'home' %}">Home</a>
+            </li>
+            <li class="breadcrumb-item">
+              <a
+                href="#"
+                hx-target="#MDI"
+                hx-push-url="{% url 'employee:visitList' %}"
+                hx-get="{% url 'employee:visitList' %}"
+                >Vists List</a
+              >
+            </li>
+            <li class="breadcrumb-item active">
+              {% if isUpdate %} Visit Update {% else %} Visit Add {% endif %}
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-12">
+      <div class="card">
+        <div class="card-header mb-3">
+          <h5 class="card-title">Enter Visit Information</h5>
+        </div>
+        <div class="card-body">
+<style>
+  .employees{
+    max-height:300px;
+    border: 1px solid #CED4DA;
+    width:100%;
+    padding: .5em;
+    border-radius: 5px;
+    overflow-y: scroll;
+  }
+</style>
+
+
+
+          <form action="." hx-target="#MDI"{% if isUpdate %} hx-post="{% url 'employee:visitUpdate' object.pk %}"
+            {% else %}
+            hx-post="{% url 'employee:visitAdd' %}"
+            {% endif %}
+          >
+            {% csrf_token %}
+            <div class="row">
+              <div class="col-xl-12">
+                <div class="form-group row">
+                  <label class="col-lg-3 col-form-label"
+                    >{{form.forestArea.label}}</label
+                  >
+                  <div class="col-lg-9">
+                    {{form.forestArea|as_crispy_field}}
+                  </div>
+                </div>
+              </div>
+              <div class="col-lg-12">
+                <div class="form-group row">
+                  <label class="col-lg-3 col-form-label"
+                    >{{form.date.label}}</label
+                  >
+                  <div class="col-lg-3">{{form.date|as_crispy_field}}</div>
+                </div>
+              </div>
+              <div class="col-xl-12">
+                <div class="form-group row">
+                  <label class="col-lg-3 col-form-label"
+                    >{{form.employees.label}}</label
+                  >
+                  <div class="col-lg-9">
+                   <div class="employees">
+                    {{form.employees|as_crispy_field}}
+                   </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="col-xl-12">
+                <div class="form-group row">
+                  <label class="col-lg-3 col-form-label"
+                    >{{form.description.label}}</label
+                  >
+                  <div class="col-lg-9">
+                    {{form.description|as_crispy_field}}
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="text-end">
+              <button type="submit" class="btn btn-primary">Submit</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<script>
+
+  {% if isUpdate %}
+    let a = document.querySelector(".text-break a");
+    a.setAttribute("target","_blank");
+  {% endif %}
+</script>

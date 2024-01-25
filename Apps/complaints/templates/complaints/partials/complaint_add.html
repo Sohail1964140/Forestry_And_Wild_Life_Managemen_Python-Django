@@ -1,0 +1,125 @@
+{% load crispy_forms_tags %}
+{% load static %}
+{% include "utils/messages.html" %}
+
+  <div class="content container-fluid">
+    <div class="page-header">
+      <div class="row">
+        <div class="col-sm-12">
+          <div class="page-sub-header">
+            <h3 class="page-title">{{heading}}</h3>
+            <ul class="breadcrumb">
+              <li class="breadcrumb-item">
+                <a href="#">Home</a>
+                
+              </li>
+              <li class="breadcrumb-item"><a href="#" hx-target="#MDI" hx-push-url="{% url 'complaintList' %}" hx-get="{% url 'complaintList' %}">Complaint List</a></li>
+              <li class="breadcrumb-item active">{% if isUpdate %} Complaint Update {% else %}  Complaint Add {% endif %}</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-md-12">
+        <div class="card">
+          <div class="card-header mb-3">
+            <h5 class="card-title">Enter Complatins Information</h5>
+          </div>
+          <div class="card-body">
+            <form action="." hx-target="#MDI" {% if isUpdate %} hx-post="{% url 'complaintUpdate' object.pk %}" {% else %} hx-post="{% url 'complaintAdd' %}" {% endif %} >
+              {% csrf_token %}
+              <div class="row">
+                <div class="col-xl-12">
+                  <div class="form-group row">
+                    <label class="col-lg-3 col-form-label">{{compForm.area.label}}</label>
+                    <div class="col-lg-9">
+                      {{compForm.area|as_crispy_field}}
+                    </div>
+                  </div>
+                
+                </div>
+                <div class="col-xl-12">
+                  <div class="form-group row">
+                    <label class="col-lg-3 col-form-label">{{compForm.subject.label}}</label>
+                    <div class="col-lg-9">
+                      {{compForm.subject|as_crispy_field}}
+                    </div>
+                  </div>
+                
+                </div>
+ 
+                <div class="col-xl-12 {% if request.user.is_superuser %} {% else %} d-none {% endif %}">
+                  <div class="form-group row">
+                    <label class="col-lg-3 col-form-label">{{compForm.status.label}}</label>
+                    <div class="col-lg-9">
+                      {{compForm.status|as_crispy_field}}
+                    </div>
+                  </div>
+                
+                </div>
+
+
+                <div class="col-xl-12">
+                  <div class="form-group row">
+                    <label class="col-lg-3 col-form-label">{{compForm.description.label}}</label>
+                    <div class="col-lg-9">
+                      {{compForm.description|as_crispy_field}}
+                    </div>
+                  </div>
+                
+                </div>
+              </div>
+
+
+              <div class="text-end">
+                <button type="submit"  class="btn btn-primary">Submit</button>
+              </div>
+            </form>
+            <div class="row {% if not isSubmit %}d-none{% endif %}">
+              <div class="col-xl-12">
+                <div class="alert alert-dark my-4 d-flex justify-content-between pe-2" role="alert">
+                  <strong>Video Evidance</strong>
+                  <a href="" hx-get="{% url 'videoAddForm' %}" hx-target="#videoFormMDI" hx-swap="beforeend"  class="btn  btn-sm btn-info text-white"><i class="fas fa-plus"></i></a>
+                  </div>
+                </div>
+              </div>
+              <div class="col-xl-12">
+                <div class="form-group row" id="videoFormMDI">
+                  
+                  {% for video in videos  %}
+                  
+                  {% include 'complaints/partials/videoForm.html' %}
+                    
+                  {% endfor %}
+                    
+                </div>
+              </div>
+            <div class="row {% if not isSubmit %}d-none{% endif %}">
+              <div class="col-xl-12">
+                <div class="alert alert-dark mb-4 d-flex justify-content-between pe-2" role="alert">
+                  <strong>Image Evidance</strong>
+                  <a href="" hx-get="{% url 'imageAddForm' %}" hx-target="#imageFormMDI" hx-swap="beforeend"  class="btn  btn-sm btn-info text-white"><i class="fas fa-plus"></i></a>
+                  </div>
+                </div>
+              </div>
+                <div class="col-xl-12">
+                <div class="form-group row" id="imageFormMDI">
+                  
+                  {% for image in images  %}
+                   {% include 'complaints/partials/imageForm.html' %}
+                  {% endfor %}
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+{% include 'utils/acceptOnlyChars.html' %}
+<script>
+  acceptOnlyChars(['id_subject'])
+</script>

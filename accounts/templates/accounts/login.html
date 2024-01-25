@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+{% load crispy_forms_tags %} {% load static %}
+<html lang="en">
+  <head>
+    <!-- META TAGS -->
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <!-- BOOTSTRAP -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.2.3/css/bootstrap.min.css"
+      integrity="sha512-SbiR/eusphKoMVVXysTKG/7VseWii+Y3FdHrt0EpKgpToZeemhqHeZeLWLhJutz/2ut2Vw1uQEj2MbRF+TVBUA=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+
+    <!-- FONT AWESOME -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+      integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+
+   <!-- CUSTOM CSS -->
+   <link rel="stylesheet" href="{% static 'assets/css/style2.css' %}" />
+   <link rel="stylesheet" href="{% static 'assets/css/resposive.css' %}" />
+
+    <title>Forestry | Login</title>
+  </head>
+  <body>
+    <!-- Login Screen -->
+    <section class="LoginScreen">
+      <div class="container">
+        <div class="row loginRow">
+          <div class="col-12 col-lg-8">
+            <div class="mainContainer">
+              <div class="logImage">
+                <img src="{% static 'assets/img/img/login.svg' %}" class="img-fluid" />
+              </div>
+              <div class="logForm">
+                <div class="formHeading">
+                  <h4 class="formTitle">Login</h4>
+                  <p class="text">Login this only for Employees</p>
+                
+                </div>
+                {% if form.errors %}
+                <div class="alert alert-danger" role="alert">
+                    <strong>Login Field</strong> 
+                    username or password is incorrect
+                </div>
+                {% endif %}
+                <form action="." method="post" class="input-group">
+                  {% csrf_token %}
+                  {{form.username|as_crispy_field}}
+                  {{form.password|as_crispy_field}}
+
+                  <div class="form-check">
+                    <input
+                      class="form-check-input"
+                      type="checkbox"
+                      value=""
+                      id="flexCheckIndeterminate"
+                    />
+                    <label
+                      class="form-check-label"
+                      for="flexCheckIndeterminate"
+                    >
+                      Show Password
+                    </label>
+                  </div>
+
+                  <div class="submitBtn">
+                    <button type="submit" class="mainBtn">Login</button>
+                  </div>
+
+                  <div class="forgetPassword">
+                    <a  class="forget" href="{% url 'account_reset_password' %}">Forget Password?</a>
+                  </div>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- === SCRIPT FILES === -->
+
+    <!-- BOOTSTRAP -->
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.2.3/js/bootstrap.bundle.min.js"
+      integrity="sha512-i9cEfJwUwViEPFKdC1enz4ZRGBj8YQo6QByFTF92YXHi7waCqyexvRD75S5NVTsSiTv7rKWqG9Y5eFxmRsOn0A=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    ></script>
+
+    <!-- CUSTOM SCRIPT -->
+    <!-- <script src="./js/main.js"></script> -->
+  </body>
+</html>

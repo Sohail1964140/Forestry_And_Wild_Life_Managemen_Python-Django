@@ -1,0 +1,247 @@
+{% load fmsTemplateTag %}
+<div class="content container-fluid">
+  <div class="page-header">
+    <div class="row">
+      <div class="col-sm-12">
+        <div class="page-sub-header">
+          <h3 class="page-title">Expense</h3>
+          <ul class="breadcrumb">
+            <li class="breadcrumb-item">
+              <a href="#">Home</a>
+            </li>
+            <li class="breadcrumb-item active">Expenses</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- === TABLE === -->
+
+  <div class="row">
+    <div class="col-sm-12">
+      <div class="card card-table comman-shadow">
+        <div class="card-body">
+          <div class="page-header">
+            <div class="row align-items-center">
+              <div class="col">
+                <div class="m-0 top-nav-search">
+                    <form>
+                      <select class="form-control form-select" id="search">
+                        <option value="0">-- Select --</option>
+                        
+                        {% for source in sources %}
+                          <option value="{{source.pk}}">{{source}}</option>
+                        {% endfor %}
+                          
+                        </select>
+                        <button hx-trigger="click[isValueSelected()]" id="searchbtn" hx-vals="js:{'query': get_search_val()}"  hx-get="{% url 'incomeExpense:expenseSearch' %}"   hx-target="#tableMDI" class="btn" type="submit"><i class="fas fa-search"></i></button>
+                    </form>
+                    
+                </div>
+              </div>
+              <div class="col-auto text-end float-end ms-auto download-grp">
+                <a href="#" hx-target="#MDI" hx-push-url="{% url 'incomeExpense:expenseAdd' %}" hx-get="{% url 'incomeExpense:expenseAdd' %}" class="btn btn-primary"
+                  ><i class="fas fa-plus"></i
+                ></a>
+              </div>
+            </div>
+          </div>
+        <div id="tableMDI">
+            {% block table %}
+          <div class="table-responsive">
+            <div
+              id="DataTables_Table_0_wrapper"
+              class="dataTables_wrapper dt-bootstrap4 no-footer"
+            >
+              <div class="row">
+                <div class="col-sm-12 col-md-6"></div>
+              </div>
+              <div class="row">
+                <div class="col-sm-12">
+                  <table class="table border-0 star-student table-hover table-center mb-0  no-footer" role="grid">
+                    <thead class="">
+                      <tr role="row">
+                        
+                        <th>#</th>
+                        <th>Source</th>
+                        <th>Date </th>
+                        <th>Amount </th>
+                        <th>Description </th>
+                       
+                       <th class="text-end">Action </th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                        
+                        {% for expense in expenses %}
+                            <tr role="row" class="{% if forloop.counter|isOdd %} odd {% else %} even {% endif %}">
+                                <td>{{forloop.counter}}</td>
+                                
+                                <td>{{expense.source}}</td>
+                                <td>{{expense.date}}</td>
+                                <td>{{expense.amount}}</td>
+                                <td>{{expense.description}}</td>
+                                  
+                                <td class="text-end">
+                                <div class="actions">
+                                    <a
+                                    href="javascript:;"
+                                    class="btn btn-sm bg-success-light me-2"
+                                    hx-get="{% url 'incomeExpense:expenseDelete' expense.pk %}"
+                                    hx-push-url="{% url 'incomeExpense:expenseDelete' expense.pk %}"
+                                    hx-target="#MDI"
+                                    >
+                                    <i class="feather-trash"></i>
+                                    </a>
+                                    <a
+                                    href="#"
+                                    class="btn btn-sm bg-danger-light"
+                                    hx-get="{% url 'incomeExpense:expenseUpdate' expense.pk %}"
+                                    hx-push-url="{% url 'incomeExpense:expenseUpdate' expense.pk%}"
+                                    hx-target="#MDI"
+                                    >
+                                    <i class="feather-edit"></i>
+                                    </a>
+                                </div>
+                                </td>
+                            </tr>
+                        {% endfor %}
+                            
+
+                   
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+              <div class="row">
+                
+                            <!-- Pagination -->
+                        {% if not isSearch %}
+                        <div class="col-12 d-flex justify-content-end my-3">
+                            <nav>
+                                <ul class="pagination">
+                                
+                                
+                                {% if  page_obj.has_previous %}
+                                    <li class="paginate_button  page-item ">
+                                    <a class="page-link "  href="#"  hx-push-url="{% url 'incomeExpense:expenseList' %}?page={{page_obj.previous_page_number }}" hx-get="{% url 'incomeExpense:expenseList' %}?page={{page_obj.previous_page_number }}" hx-target="#MDI" hx-swap="innerHTML" tabindex="-1" aria-disabled="true">Previous</a>
+                                    </li>
+                                    {% else %}
+                                    <li class="paginate_button  page-item disabled">
+                                    <a class="page-link " href="#" tabindex="-1" aria-disabled="true">Previous</a>
+                                    </li>
+                                {% endif %}
+                                
+                                
+                                {% for page in page_obj.paginator %}
+
+
+                                    {% if page.number < 5 and  page_obj.number < 5 %}
+                                    
+                                    <li class="paginate_button  page-item   {% if page.number == page_obj.number %} active {% endif %} ">
+                                        <a class="page-link "  href="#"  hx-push-url="{% url 'incomeExpense:expenseList' %}?page={{page.number}}" hx-get="{% url 'incomeExpense:expenseList' %}?page={{page.number}}" hx-target="#MDI" hx-swap="innerHTML">{{page.number }}</a>
+                                    </li> 
+                                    {% endif %}
+                                    
+
+                                    {% if page.number >= 5 and page.number == page_obj.number %}
+                                    
+                                    <li class="paginate_button  page-item ">
+                                    <a class="page-link " href="#"  hx-push-url="{% url 'incomeExpense:expenseList' %}?page=1" hx-get="{% url 'incomeExpense:expenseList' %}?page={{1}}" hx-target="#MDI" hx-swap="innerHTML">1</a>
+                                    </li>
+
+                                    <li class=" paginate_button  page-item disabled">
+                                        <a class="page-link " href="#">...</a>
+                                    </li>
+                                    
+                                    <li class=" paginate_button page-item ">
+                                        <a class="page-link " href="#"  hx-push-url="{% url 'incomeExpense:expenseList' %}?page={{page.number}}" hx-get="{% url 'incomeExpense:expenseList' %}?page={{page_obj.number|add:-1}}" hx-target="#MDI" hx-swap="innerHTML">{{page_obj.number|add:-1 }}</a>
+                                    </li>
+                                    
+                                    <li class=" paginate_button page-item {% if page.number == page_obj.number %} active {% endif %} ">
+                                        <a class="page-link " href="#"  hx-push-url="{% url 'incomeExpense:expenseList' %}?page={{page.number}}" hx-get="{% url 'incomeExpense:expenseList' %}?page={{page.number}}" hx-target="#MDI" hx-swap="innerHTML">{{page.number }}</a>
+                                    </li>
+                                    
+                                    {% if page_obj.number < page_obj.paginator.num_pages %}
+                                    <li class=" paginate_button  page-item">
+                                        <a class="page-link " href="#"  hx-push-url="{% url 'incomeExpense:expenseList' %}?page={{page.number}}" hx-get="{% url 'incomeExpense:expenseList' %}?page={{page_obj.number|add:1}}" hx-target="#MDI" hx-swap="innerHTML">{{page_obj.number|add:1 }}</a>
+                                    </li>
+                                    {% endif %}
+                                    
+                                    
+                                    {% endif %}
+                                    
+                                    
+                                    {% if forloop.last and  page.number != page_obj.number and page_obj.number|add:1 < page_obj.paginator.num_pages %}
+                                    <li class="paginate_button  page-item disabled">
+                                        <a class="page-link" href="#">...</a>
+                                    </li>
+                                    
+                                        <li class="paginate_button  page-item">
+                                        <a class="page-link "  href="#" hx-push-url="{% url 'incomeExpense:expenseList' %}?page={{page.number}}" hx-get="{% url 'incomeExpense:expenseList' %}?page={{page.number}}" hx-target="#MDI" hx-swap="innerHTML">{{page.number }}</a>
+                                        </li>
+                                    {% endif %}
+                                    
+                                    
+                                {% endfor %}
+                                    
+                                
+                                
+                                {% if page_obj.has_next %}
+                                    <li class=" paginate_button page-item">
+                                    <a class="page-link "  href="#" hx-target="#MDI" hx-push-url="{% url 'incomeExpense:expenseList' %}?page={{page_obj.next_page_number}}" hx-get="{% url 'incomeExpense:expenseList' %}?page={{page_obj.next_page_number}}">Next</a>
+                                    </li>
+                                {% else %}
+                                    <li class="paginate_button  page-item disabled">
+                                        <a class="page-link" href="#">Next</a>
+                                    </li>
+                                {% endif %}
+                                </ul>
+                            </nav>
+                        </div>
+                    {% else %}
+                        {% include "expense/partials/search_pagination.html" %}
+                    {% endif %}
+
+                    {% comment %} {% include "utils/list_icons.html" %} {% endcomment %}
+              </div>
+
+              </div>
+            </div>
+          </div>
+
+          
+
+
+          {% endblock table %}
+        </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+{% include 'utils/messages.html' %}
+{% include 'utils/changeUrl.html' %}
+<script>
+changeURL('{% url "incomeExpense:expenseList" %}')
+</script>
+
+<script>
+  
+    function get_search_val(){
+  
+      let search = document.getElementById('search').value
+      
+      return search
+    }
+
+    function isValueSelected(){
+      let search = document.getElementById('search').value
+      let selected = true? search != "0" : false
+
+      return selected;
+    }
+  </script>

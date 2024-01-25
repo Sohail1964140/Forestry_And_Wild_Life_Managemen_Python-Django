@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, user-scalable=0"
+    />
+    <title>{% block title %}FMS{% endblock title %}</title>
+    <link rel="shortcut icon" href="{% static 'assets/img/logo-small.png' %}" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,400;0,500;0,700;0,900;1,400;1,500;1,700&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="{% static 'assets/plugins/bootstrap/css/bootstrap.min.css' %}"
+    />
+    <link rel="stylesheet" href="{% static 'assets/css/toas.css' %}" />
+    <link
+      rel="stylesheet"
+      href="{% static 'assets/plugins/feather/feather.css' %}"
+    />
+    <link
+      rel="stylesheet"
+      href="{% static 'assets/plugins/icons/flags/flags.css' %}"
+    />
+    <link
+      rel="stylesheet"
+      href="{% static 'assets/plugins/fontawesome/css/fontawesome.min.css' %}"
+    />
+    <link
+      rel="stylesheet"
+      href="{% static 'assets/plugins/fontawesome/css/all.min.css' %}"
+    />
+
+    <link rel="stylesheet" href="{% static 'assets/css/style.css' %}" />
+    <script src="{% static 'assets/js/htmx.min.js' %}" defer></script>
+    <link
+    rel="stylesheet"
+    href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+    integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY="
+    crossorigin=""
+    />
+    <script
+    src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+    integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
+    crossorigin=""
+    ></script>
+
+    {% block style %}FMS{% endblock style %}
+    <style>
+      .preloader-container {
+        position: relative;
+        display: none;
+      }
+      .htmx-request.preloader-container ~ .c3 {
+        color: red;
+      }
+
+      .htmx-request .preloader-container {
+        display: block;
+      }
+
+      .htmx-request.preloader-container {
+        display: block;
+      }
+
+      .preloader {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 3px;
+        background-color: #f1f1f1; /* Light gray background color */
+        z-index: 9999;
+      }
+
+      .preloader-inner {
+        height: 100%;
+        width: 100%;
+        display: flex;
+        align-items: center;
+        overflow: hidden;
+      }
+
+      .line {
+        width: 100%;
+        height: 3px;
+        background: linear-gradient(
+          to right,
+          #4285f4,
+          #34a853,
+          #fbbc05
+        ); /* Google color combination */
+        animation: progress 2s infinite;
+      }
+
+      @keyframes progress {
+        0%,
+        100% {
+          transform: translateX(-100%);
+        }
+        50% {
+          transform: translateX(100%);
+        }
+      }
+
+      /* Adjust the animation duration for the specific color */
+      .line:nth-child(2) {
+        animation-duration: 6s; /* Slower animation for the Google green color */
+      }
+
+      /* Content Styles */
+      .content {
+        /* Adjust padding or margin as needed to avoid overlap */
+        padding-top: 50px;
+      }
+
+      .spanner-indicator {
+        display: none;
+        transition: opacity 500ms ease-in;
+      }
+
+      .htmx-request .spanner-indicator {
+        display: inline-block;
+      }
+
+      .htmx-request.spanner-indicator {
+        display: inline-block;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="main-wrapper" hx-indicator="#preloader-indicator">
+      <!--Header-->
+      {% include "includes/headers.html" %}
+      <!--Sidebar-->
+      {% include "includes/sidebar.html" %}
+      <!-- Preloader -->
+      <div class="preloader-container" id="preloader-indicator">
+        <div class="preloader">
+          <div class="preloader-inner">
+            <div class="line"></div>
+          </div>
+        </div>
+      </div>
+      <!-- End Preloader -->
+      <div class="page-wrapper h-100" id="MDI">
+        {% block content %} {% include 'includes/daishboard.html' %} {% endblock content %}
+      </div>
+    </div>
+
+    <script src="{% static 'assets/js/jquery-3.6.0.min.js' %}"></script>
+    <script src="{% static 'assets/plugins/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
+    <script src="{% static 'assets/js/toas.js' %}"></script>
+    <script src="{% static 'assets/js/feather.min.js' %}"></script>
+
+    <script src="{% static 'assets/js/script.js' %}"></script>
+    
+    {% block script %}{% endblock script %}
+  </body>
+</html>

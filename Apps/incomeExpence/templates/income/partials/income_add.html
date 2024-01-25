@@ -1,0 +1,83 @@
+{% load crispy_forms_tags %}
+{% load static %}
+{% include "utils/messages.html" %}
+
+  <div class="content container-fluid">
+    <div class="page-header">
+      <div class="row">
+        <div class="col-sm-12">
+          <div class="page-sub-header">
+            <h3 class="page-title">{{heading}}</h3>
+            <ul class="breadcrumb">
+              <li class="breadcrumb-item">
+                <a href="#">Home</a>
+                
+              </li>
+              <li class="breadcrumb-item"><a href="#" hx-target="#MDI" hx-push-url="{% url 'incomeExpense:incomeList' %}" hx-get="{% url 'incomeExpense:incomeList' %}">Income List</a></li>
+              <li class="breadcrumb-item active">{% if isUpdate %} Income Update {% else %}  Income Add {% endif %}</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-md-12">
+        <div class="card">
+          <div class="card-header mb-3">
+            <h5 class="card-title">Enter Income Information</h5>
+          </div>
+          <div class="card-body">
+            <form action="." hx-target="#MDI" {% if isUpdate %} hx-post="{% url 'incomeExpense:incomeUpdate' object.pk %}" {% else %} hx-post="{% url 'incomeExpense:incomeAdd' %}" {% endif %} >
+              {% csrf_token %}
+              <div class="row">
+                <div class="col-xl-12">
+                  <div class="form-group row">
+                    <label class="col-lg-3 col-form-label">{{form.source.label}}</label>
+                    <div class="col-lg-9">
+                      {{form.source|as_crispy_field}}
+                    </div>
+                  </div>
+                
+                </div>
+                <div class="col-lg-12">
+                  <div class="form-group row">
+                    <label class="col-lg-3 col-form-label">{{form.amount.label}}</label>
+                    <div class="col-lg-3">
+                      {{form.amount|as_crispy_field}}
+                    </div>
+                  </div>
+                
+                </div>
+                <div class="col-xl-12">
+                  <div class="form-group row">
+                    <label class="col-lg-3 col-form-label">{{form.date.label}}</label>
+                    <div class="col-lg-9">
+                      {{form.date|as_crispy_field}}
+                    </div>
+                  </div>
+                
+                </div>
+                <div class="col-xl-12">
+                  <div class="form-group row">
+                    <label class="col-lg-3 col-form-label">{{form.description.label}}</label>
+                    <div class="col-lg-9">
+                      {{form.description|as_crispy_field}}
+                    </div>
+                  </div>
+                
+                </div>
+              </div>
+
+              <div class="text-end">
+                <button type="submit"  class="btn btn-primary">Submit</button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+

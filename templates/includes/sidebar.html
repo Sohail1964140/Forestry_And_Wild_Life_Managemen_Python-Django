@@ -1,0 +1,302 @@
+{% load static %}
+{% load fmsTemplateTag %}
+<div class="sidebar" id="sidebar" hx-target="#MDI">
+  <div class="sidebar-inner slimscroll">
+    <div id="sidebar-menu" class="sidebar-menu">
+      <ul>
+        <li class="menu-title">
+          <span>Main Menu</span>
+        </li>
+
+        <li>
+          <!--hx-push-url="{% url 'home' %}" hx-get="{% url 'home' %}"-->
+          <a href="{% url 'home' %}"
+            ><i class="fas feather-grid"></i> <span>Dashboard</span></a
+          >
+        </li>
+        {% if request.user|hasPerm:"employees.add_employee" or  request.user|hasPerm:"employees.view_employee" %}
+        <li class="submenu">
+          <a href="#"
+            ><i class="fas fa-users"></i> <span> Employee</span>
+            <span class="menu-arrow"></span
+          ></a>
+          <ul>
+            {% if request.user|hasPerm:"employees.add_employee" %}
+            <li>
+              <a
+                href="#"
+                hx-push-url="{% url 'employee:empAdd' %}"
+                hx-get="{% url 'employee:empAdd' %}"
+                >Add Employee</a
+              >
+            </li>
+            {% endif %}
+            {% if request.user|hasPerm:"employees.view_employee" %}
+            <li>
+              <a
+                href="#"
+                hx-push-url="{% url 'employee:empList' %}"
+                hx-get="{% url 'employee:empList' %}"
+                >View Employee</a
+              >
+            </li>
+
+            <li>
+              <a
+                href="#"
+                hx-push-url="{% url 'core:designationAdd' %}"
+                hx-get="{% url 'core:designationAdd' %}"
+                >Designation</a
+              >
+            </li>
+
+            {% endif %}
+          </ul>
+        </li>
+        {% endif %}
+
+        {% if request.user|hasPerm:"core.add_forestarea" or  request.user|hasPerm:"core.view_forestarea" %}
+        <li class="submenu">
+          <a href="#"
+            ><i class="fas fa-map-marked"></i> <span> Area</span>
+            <span class="menu-arrow"></span
+          ></a>
+          <ul>
+            {% if request.user|hasPerm:"core.add_forestarea" %}
+            <li>
+              <a
+                href="#"
+                hx-push-url="{% url 'core:areaAdd' %}"
+                hx-get="{% url 'core:areaAdd' %}"
+                >Add Area</a
+              >
+            </li>
+            {% endif %}
+            {% if request.user|hasPerm:"core.view_forestarea" %}
+            <li>
+              <a
+                href="#"
+                hx-push-url="{% url 'core:areaList' %}"
+                hx-get="{% url 'core:areaList' %}"
+                >View Area</a
+              >
+            </li>
+            {% endif %}
+          </ul>
+        </li>
+        {% endif %}
+
+        {% if request.user|hasPerm:"employees.add_visit" or  request.user|hasPerm:"employees.view_visit" %}
+        <li class="submenu">
+          <a href="#"
+            ><i class="fas fa-plane"></i> <span> Inspection</span>
+            <span class="menu-arrow"></span
+          ></a>
+          <ul>
+            {% if request.user|hasPerm:"employees.add_visit" %}
+            <li>
+              <a
+                href="#"
+                hx-push-url="{% url 'employee:visitAdd' %}"
+                hx-get="{% url 'employee:visitAdd' %}"
+                >Add Inspector</a
+              >
+            </li>
+            {% endif %}
+            {% if request.user|hasPerm:"employees.view_visit" %}
+            <li>
+              <a
+                href="#"
+                hx-push-url="{% url 'employee:visitList' %}"
+                hx-get="{% url 'employee:visitList' %}"
+                >Inspection Record</a
+              >
+            </li>
+            {% endif %}
+          </ul>
+        </li>
+        {% endif %}
+
+        <li>
+          <a
+            href="#"
+            hx-push-url="{% url 'complaintList' %}"
+            hx-get="{% url 'complaintList' %}"
+            ><i class="fas fa-clipboard-check"></i> <span>Finding</span></a
+          >
+        </li>
+
+        <li class="submenu">
+          <a href="#"
+            ><i class="fas fa-users"></i> <span> Offender</span>
+            <span class="menu-arrow"></span
+          ></a>
+          <ul>
+            <li>
+              <a
+                href="#"
+                hx-push-url="{% url 'offenderAdd' %}"
+                hx-get="{% url 'offenderAdd' %}"
+                >Offender Add</a
+              >
+            </li>
+            <li>
+              <a
+                href="#"
+                hx-push-url="{% url 'offenderList' %}"
+                hx-get="{% url 'offenderList' %}"
+                >Offender List</a
+              >
+            </li>
+          </ul>
+        </li>
+        {% if request.user.is_superuser %}
+        <li class="submenu">
+          <a href="#"
+            ><i class="fas fa-tree"></i> <span> Wood Record</span>
+            <span class="menu-arrow"></span
+          ></a>
+          <ul>
+            <li>
+              <a
+                href="#"
+                hx-push-url="{% url 'core:specieList' %}"
+                hx-get="{% url 'core:specieList' %}"
+                >Tree Species</a
+              >
+            </li>
+            <li>
+              <a
+                href="#"
+                hx-push-url="{% url 'wood:woodEntryList' %}"
+                hx-get="{% url 'wood:woodEntryList' %}"
+                >Woods</a
+              >
+            </li>
+              <a
+                href="#"
+                hx-push-url="{% url 'wood:auctionList' %}"
+                hx-get="{% url 'wood:auctionList' %}"
+                >Auctions</a
+              >
+            
+            </li>
+            </li>
+              <a
+                href="#"
+                hx-push-url="{% url 'wood:alatmentList' %}"
+                hx-get="{% url 'wood:alatmentList' %}"
+                >Tree Alatments</a
+              >
+            
+            </li>
+          </ul>
+
+          {% endif %}
+          {% if request.user.is_superuser %}
+        <li class="submenu">
+          <a href="#"
+            ><i class="fas fa-users"></i> <span> Customer</span>
+            <span class="menu-arrow"></span
+          ></a>
+          <ul>
+            <li>
+              <a
+                href="#"
+                hx-push-url="{% url 'core:customerAdd' %}"
+                hx-get="{% url 'core:customerAdd' %}"
+                >Add Customer</a
+              >
+            </li>
+            <li>
+              <a
+                href="#"
+                hx-push-url="{% url 'core:customerList' %}"
+                hx-get="{% url 'core:customerList' %}"
+                >View Customer</a
+              >
+            </li>
+          </ul>
+        </li>
+        {% endif %}
+
+
+
+        {% if request.user.is_superuser %}
+
+        <li class="submenu">
+          <a href="#"
+            ><i class="fas fa-money-bill"></i> <span> Inome</span>
+            <span class="menu-arrow"></span
+          ></a>
+          <ul>
+            <li>
+              <li>
+                <a
+                  href="#"
+                  hx-push-url="{% url 'incomeExpense:incomeSourceList' %}"
+                  hx-get="{% url 'incomeExpense:incomeSourceList' %}"
+                  >Income Source</a
+                >
+              </li>
+              <a
+                href="#"
+                hx-push-url="{% url 'incomeExpense:incomeAdd' %}"
+                hx-get="{% url 'incomeExpense:incomeAdd' %}"
+                >Income Add</a
+              >
+            </li>
+            <li>
+              <a
+                href="#"
+                hx-push-url="{% url 'incomeExpense:incomeList' %}"
+                hx-get="{% url 'incomeExpense:incomeList' %}"
+                >Income List</a
+              >
+            </li>
+          </ul>
+        </li>
+        {% endif %}
+        {% if request.user.is_superuser %}
+        <li class="submenu">
+          <a href="#"
+            ><i class="fas fa-chart-bar"></i> <span>Expenses</span>
+            <span class="menu-arrow"></span
+          ></a>
+          <ul>
+            <li>
+              
+            <li>
+              <a
+                href="#"
+                hx-push-url="{% url 'incomeExpense:expenseSourceList' %}"
+                hx-get="{% url 'incomeExpense:expenseSourceList' %}"
+                >Expensis Source</a
+              >
+            </li>
+
+              <a
+                href="#"
+                hx-push-url="{% url 'incomeExpense:expenseAdd' %}"
+                hx-get="{% url 'incomeExpense:expenseAdd' %}"
+                >Expenses Add</a
+              >
+            </li>
+            <li>
+              <a
+                href="#"
+                hx-push-url="{% url 'incomeExpense:expenseList' %}"
+                hx-get="{% url 'incomeExpense:expenseList' %}"
+                >Expenses List</a
+              >
+            </li>
+          </ul>
+        </li>
+      {% endif %}
+       
+          </ul>
+        </li>
+      </ul>
+    </div>
+  </div>
+</div>
